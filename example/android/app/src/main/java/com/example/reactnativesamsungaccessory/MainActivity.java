@@ -1,4 +1,4 @@
-package com.example.reactnativesamsungaccessory;
+package com.egorshulga.reactnative.samsungaccessory.example;
 
 import com.facebook.react.ReactActivity;
 
