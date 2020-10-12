@@ -24,12 +24,6 @@ To run the example app on Android:
 cd example && npm run android
 ```
 
-To run the example app on iOS:
-
-```sh
-cd example && npm run ios
-```
-
 Make sure your code passes TypeScript and ESLint. Run the following to verify:
 
 ```sh
@@ -48,8 +42,6 @@ Remember to add tests for your change if possible. Run the unit tests by:
 ```sh
 npm run test
 ```
-
-To edit the Objective-C files, open `example/ios/SamsungAccessoryExample.xcworkspace` in XCode and find the source files at `Pods > Development Pods > react-native-samsung-accessory`.
 
 To edit the Kotlin files, open `example/android` in Android studio and find the source files at `reactnativesamsungaccessory` under `Android`.
 
