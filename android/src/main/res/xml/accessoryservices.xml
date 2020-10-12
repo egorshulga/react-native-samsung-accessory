@@ -1,0 +1,45 @@
+<resources>
+  <application name="ReactNativeAccessory">
+    <serviceProfile
+      name="react-native-accessory-provider"
+      id="/react-native/accessory-provider"
+      role="provider"
+      serviceImpl="com.egorshulga.reactnative.samsungaccessory.AccessoryProvider"
+      version="1.0">
+
+      <supportedTransports>
+        <transport type="TRANSPORT_BT" />
+        <transport type="TRANSPORT_BLE" />
+        <transport type="TRANSPORT_WIFI" />
+        <transport type="TRANSPORT_USB" />
+      </supportedTransports>
+
+      <serviceChannel
+        dataRate="high"
+        id="901"
+        priority="medium"
+        reliability="enable" />
+    </serviceProfile>
+
+    <serviceProfile
+      name="react-native-accessory-provider"
+      id="/react-native/accessory-provider"
+      role="provider"
+      serviceImpl="com.egorshulga.reactnative.samsungaccessory.AccessoryConsumer"
+      version="1.0">
+
+      <supportedTransports>
+        <transport type="TRANSPORT_BT" />
+        <transport type="TRANSPORT_BLE" />
+        <transport type="TRANSPORT_WIFI" />
+        <transport type="TRANSPORT_USB" />
+      </supportedTransports>
+
+      <serviceChannel
+        dataRate="high"
+        id="901"
+        priority="medium"
+        reliability="enable" />
+    </serviceProfile>
+  </application>
+</resources>

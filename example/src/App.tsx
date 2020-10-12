@@ -1,19 +1,15 @@
-import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import SamsungAccessory from 'react-native-samsung-accessory';
+import * as React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
+export default function App(): React.ReactElement {
   React.useEffect(() => {
-    SamsungAccessory.multiply(3, 7).then(setResult);
-  }, []);
+  }, [])
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>Result: {0}</Text>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -22,4 +18,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})

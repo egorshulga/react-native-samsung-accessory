@@ -1,4 +1,25 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.egorshulga.reactnative.samsungaccessory">
+  package="com.egorshulga.reactnative.samsungaccessory">
 
+  <uses-permission android:name="android.permission.BLUETOOTH" />
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+  <uses-permission android:name="com.samsung.accessory.permission.ACCESSORY_FRAMEWORK" />
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+  <application>
+    <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver">
+      <intent-filter>
+        <action android:name="com.samsung.accessory.action.SERVICE_CONNECTION_REQUESTED" />
+      </intent-filter>
+    </receiver>
+    <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver">
+      <intent-filter>
+        <action android:name="com.samsung.accessory.action.REGISTER_AGENT" />
+      </intent-filter>
+    </receiver>
+
+    <service android:name="com.samsung.android.sdk.accessory.SAService" />
+
+    <meta-data android:name="AccessoryServicesLocation" android:value="/res/xml/accessoryservices.xml" />
+  </application>
 </manifest>
