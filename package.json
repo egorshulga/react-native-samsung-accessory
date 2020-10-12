@@ -27,7 +27,6 @@
   },
   "keywords": [
     "react-native",
-    "ios",
     "android"
   ],
   "repository": "https://github.com/egorshulga/react-native-samsung-accessory",
