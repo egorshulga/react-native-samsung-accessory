@@ -13,5 +13,5 @@ export interface SamsungAccessory {
 
 export enum AccessoryFeature {
   DeviceAccessory = NativeModules.SA.DEVICE_ACCESSORY,
-  SERVICE_MESSAGE = NativeModules.SA.SERVICE_MESSAGE,
+  ServiceMessage = NativeModules.SA.SERVICE_MESSAGE,
 }
