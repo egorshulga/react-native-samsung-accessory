@@ -31,7 +31,7 @@ public final class SAModule extends ReactContextBaseJavaModule {
       sa.initialize(this.getReactApplicationContext().getApplicationContext());
       promise.resolve(null);
     } catch (SsdkUnsupportedException e) {
-      promise.reject(Error.codes.get(e.getType()), e.getMessage(), e);
+      promise.reject(Error.Code.get(e.getType()), e.getMessage(), e);
     } catch (Exception e) {
       promise.reject(e);
     }
