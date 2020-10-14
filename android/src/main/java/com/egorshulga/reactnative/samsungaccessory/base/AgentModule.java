@@ -1,8 +1,6 @@
 package com.egorshulga.reactnative.samsungaccessory.base;
 
 import com.egorshulga.reactnative.samsungaccessory.constants.Event;
-import com.egorshulga.reactnative.samsungaccessory.messages.MessageAgent;
-import com.egorshulga.reactnative.samsungaccessory.messages.SAMessageModule;
 import com.egorshulga.reactnative.samsungaccessory.utils.Result;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -13,7 +11,6 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.samsung.android.sdk.accessory.SAAgentV2;
 import com.samsung.android.sdk.accessory.SAPeerAgent;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,12 +25,13 @@ public abstract class AgentModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
-  protected void initAgent(Class<? extends Agent<? extends AgentModule>> clazz) {
+  protected void initAgent(Class<? extends Agent<? extends AgentModule>> clazz, Runnable callback) {
     SAAgentV2.requestAgent(reactContext.getApplicationContext(), clazz.getName(),
       new SAAgentV2.RequestAgentCallback() {
         @Override
         public void onAgentAvailable(SAAgentV2 agent) {
-          AgentModule.this.agent = (Agent<? extends AgentModule>) agent;
+          AgentModule.this.agent = clazz.cast(agent);
+          callback.run();
         }
 
         @Override
