@@ -1,5 +1,7 @@
 package com.egorshulga.reactnative.samsungaccessory;
 
+import com.egorshulga.reactnative.samsungaccessory.constants.SAConstantsModule;
+import com.egorshulga.reactnative.samsungaccessory.messages.SAMessageModule;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -14,7 +16,8 @@ public final class SamsungAccessoryPackage implements ReactPackage {
   public List<NativeModule> createNativeModules(@NotNull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
     modules.add(new SAModule(reactContext));
-    modules.add(new SsdkModule(reactContext));
+    modules.add(new SAConstantsModule(reactContext));
+    modules.add(new SAMessageModule(reactContext));
     return modules;
   }
 

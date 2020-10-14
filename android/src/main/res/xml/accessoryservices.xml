@@ -1,10 +1,10 @@
 <resources>
-  <application name="ReactNativeAccessory">
+  <application name="ReactNativeToSamsungAccessory">
     <serviceProfile
       role="provider"
-      name="react-native-accessory"
-      id="/react-native/accessory"
-      serviceImpl="com.egorshulga.reactnative.samsungaccessory.AccessoryProvider"
+      name="message-service"
+      id="/react-native/message-service"
+      serviceImpl="com.egorshulga.reactnative.samsungaccessory.messages.MessageAgent"
       version="1.0">
 
       <supportedTransports>

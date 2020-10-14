@@ -1,17 +1,11 @@
 import { NativeModules } from 'react-native'
+import type { Feature } from './Constants'
 
-export const { SA } = NativeModules as {
-  SA: SamsungAccessory
-}
+export const SA: SamsungAccessory = NativeModules.SA
 
 export interface SamsungAccessory {
   initialize(): Promise<void>
   getVersionCode(): Promise<number>
   getVersionName(): Promise<string>
-  isFeatureEnabled(feature: AccessoryFeature): Promise<boolean>
-}
-
-export enum AccessoryFeature {
-  DeviceAccessory = NativeModules.SA.DEVICE_ACCESSORY,
-  ServiceMessage = NativeModules.SA.SERVICE_MESSAGE,
+  isFeatureEnabled(feature: Feature): Promise<boolean>
 }

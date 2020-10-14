@@ -2,6 +2,7 @@ package com.egorshulga.reactnative.samsungaccessory;
 
 import androidx.annotation.NonNull;
 
+import com.egorshulga.reactnative.samsungaccessory.constants.Error;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -9,9 +10,6 @@ import com.facebook.react.bridge.ReactMethod;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.accessory.SA;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public final class SAModule extends ReactContextBaseJavaModule {
   private SA sa;
@@ -26,14 +24,6 @@ public final class SAModule extends ReactContextBaseJavaModule {
     super(reactContext);
   }
 
-  @Override
-  public Map<String, Object> getConstants() {
-    final Map<String, Object> constants = new HashMap<>();
-    constants.put("DEVICE_ACCESSORY", SA.DEVICE_ACCESSORY);
-    constants.put("SERVICE_MESSAGE", SA.SERVICE_MESSAGE);
-    return constants;
-  }
-
   @ReactMethod
   public final void initialize(Promise promise) {
     sa = new SA();
@@ -41,7 +31,7 @@ public final class SAModule extends ReactContextBaseJavaModule {
       sa.initialize(this.getReactApplicationContext().getApplicationContext());
       promise.resolve(null);
     } catch (SsdkUnsupportedException e) {
-      promise.reject(e);
+      promise.reject(Error.codes.get(e.getType()), e.getMessage(), e);
     } catch (Exception e) {
       promise.reject(e);
     }
