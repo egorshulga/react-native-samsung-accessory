@@ -5,6 +5,7 @@ import com.egorshulga.reactnative.samsungaccessory.constants.Event;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
+import com.samsung.android.sdk.accessory.SAAgentV2;
 import com.samsung.android.sdk.accessory.SAMessage;
 import com.samsung.android.sdk.accessory.SAPeerAgent;
 
@@ -22,9 +23,9 @@ public class SAMessageModule extends AgentModule {
 
   public SAMessageModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.setAgent(new MessageAgent(this, reactContext.getApplicationContext()));
+    this.initAgent(MessageAgent.class);
 
-    saMessage = new SAMessage(agent) {
+    saMessage = new SAMessage(SAMessageModule.this.agent) {
       @Override
       protected void onReceive(SAPeerAgent saPeerAgent, byte[] bytes) {
         String message = new String(bytes);

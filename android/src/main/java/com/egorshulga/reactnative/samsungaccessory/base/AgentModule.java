@@ -1,6 +1,8 @@
 package com.egorshulga.reactnative.samsungaccessory.base;
 
 import com.egorshulga.reactnative.samsungaccessory.constants.Event;
+import com.egorshulga.reactnative.samsungaccessory.messages.MessageAgent;
+import com.egorshulga.reactnative.samsungaccessory.messages.SAMessageModule;
 import com.egorshulga.reactnative.samsungaccessory.utils.Result;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -26,8 +28,18 @@ public abstract class AgentModule extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
-  protected void setAgent(Agent<? extends AgentModule> agent) {
-    this.agent = agent;
+  protected void initAgent(Class<? extends Agent<? extends AgentModule>> clazz) {
+    SAAgentV2.requestAgent(reactContext.getApplicationContext(), clazz.getName(),
+      new SAAgentV2.RequestAgentCallback() {
+        @Override
+        public void onAgentAvailable(SAAgentV2 agent) {
+          AgentModule.this.agent = (Agent<? extends AgentModule>) agent;
+        }
+
+        @Override
+        public void onError(int errorCode, String message) {
+        }
+      });
   }
 
   @ReactMethod

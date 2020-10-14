@@ -12,11 +12,11 @@ export interface SamsungAccessoryMessage extends SamsungAccessoryAgent {
 }
 
 export class MessageEventEmitter {
-  addPeersFoundListener(listener: (response: FoundPeersResponse) => void, context?: any): EmitterSubscription {
+  addPeersFoundListener(listener: (response: PeersFoundResponse) => void, context?: any): EmitterSubscription {
     return emitter.addListener(MessageEvent.PEERS_FOUND, listener, context)
   }
 
-  addPeersUpdatedListener(listener: (response: UpdatedPeersResponse) => void, context?: any): EmitterSubscription {
+  addPeersUpdatedListener(listener: (response: PeersUpdatedResponse) => void, context?: any): EmitterSubscription {
     return emitter.addListener(MessageEvent.PEERS_UPDATED, listener, context)
   }
 
@@ -33,12 +33,12 @@ export enum MessageEvent {
   RECEIVED_MESSAGE = 'RECEIVED_MESSAGE',
 }
 
-export interface FoundPeersResponse {
+export interface PeersFoundResponse {
   readonly status: PeerSearchStatus
   readonly peers: PeerAgent[]
 }
 
-export interface UpdatedPeersResponse {
+export interface PeersUpdatedResponse {
   readonly status: PeerAvailabilityStatus
   readonly peers: PeerAgent[]
 }
