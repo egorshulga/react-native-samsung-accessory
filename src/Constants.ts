@@ -15,12 +15,6 @@ export enum Feature {
   ServiceMessage = Constants.SERVICE_MESSAGE,
 }
 
-export enum Event {
-  PEERS_FOUND = Constants.PEERS_FOUND,
-  PEERS_UPDATED = Constants.PEERS_UPDATED,
-  RECEIVED_MESSAGE = Constants.RECEIVED_MESSAGE,
-}
-
 export enum PeerSearchStatus {
   PEER_AGENT_FOUND = Constants.PEER_AGENT_FOUND,
   FINDPEER_DEVICE_NOT_CONNECTED = Constants.FINDPEER_DEVICE_NOT_CONNECTED,
