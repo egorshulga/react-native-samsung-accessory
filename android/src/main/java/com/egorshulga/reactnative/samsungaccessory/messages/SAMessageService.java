@@ -68,6 +68,11 @@ public class SAMessageService extends Service {
   }
 
   @ReactMethod
+  public void findPeers() {
+    super.findPeers();
+  }
+
+  @ReactMethod
   public void sendMessage(String message, Promise promise) {
   }
 
