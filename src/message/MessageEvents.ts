@@ -1,5 +1,5 @@
 import { EmitterSubscription, NativeEventEmitter, NativeModules } from 'react-native'
-import type { PeersFoundResponse, PeersUpdatedResponse } from './Message'
+import type { PeersFoundResponse, PeersUpdatedResponse, ReceivedMessageResponse } from './Message'
 
 const emitter = new NativeEventEmitter(NativeModules.SAMessage)
 
@@ -12,7 +12,7 @@ export class MessageEvents {
     return emitter.addListener(MessageEvent.PEERS_UPDATED, listener, context)
   }
 
-  addMessageListener(listener: (message: string) => void, context?: any): EmitterSubscription {
+  addMessageListener(listener: (message: ReceivedMessageResponse) => void, context?: any): EmitterSubscription {
     return emitter.addListener(MessageEvent.RECEIVED_MESSAGE, listener, context)
   }
 

@@ -29,4 +29,11 @@ public class Result {
     return result;
   }
 
+  public static WritableMap packMessage(SAPeerAgent peer, String message) {
+    WritableMap result = Arguments.createMap();
+    result.putString("message", message);
+    result.putString("peerId", peer.getPeerId());
+    return result;
+  }
+
 }

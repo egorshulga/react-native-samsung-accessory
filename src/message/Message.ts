@@ -26,3 +26,8 @@ export interface PeersUpdatedResponse {
   readonly status: PeerAvailabilityStatus
   readonly peers: PeerAgent[]
 }
+
+export interface ReceivedMessageResponse {
+  readonly peerId: string
+  readonly message: string
+}

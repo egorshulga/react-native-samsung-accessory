@@ -2,6 +2,7 @@ package com.egorshulga.reactnative.samsungaccessory.messages;
 
 import com.egorshulga.reactnative.samsungaccessory.base.Service;
 import com.egorshulga.reactnative.samsungaccessory.constants.Event;
+import com.egorshulga.reactnative.samsungaccessory.utils.Result;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactMethod;
@@ -109,7 +110,7 @@ public class SAMessageService extends Service {
     }
   }
 
-  public void onReceivedMessage(String message) {
-    emitEvent(Event.RECEIVED_MESSAGE, message);
+  public void onReceivedMessage(SAPeerAgent peer, String message) {
+    emitEvent(Event.RECEIVED_MESSAGE, Result.packMessage(peer, message));
   }
 }
