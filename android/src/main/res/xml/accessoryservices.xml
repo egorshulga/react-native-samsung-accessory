@@ -2,8 +2,8 @@
   <application name="ReactNativeToSamsungAccessory">
     <serviceProfile
       role="consumer"
-      name="message-service"
-      id="/rn/message-service"
+      name="messageservice"
+      id="/react-native/message-service"
       serviceImpl="com.egorshulga.reactnative.samsungaccessory.messages.MessageAgent"
       version="1.0">
 
@@ -14,11 +14,9 @@
         <transport type="TRANSPORT_USB" />
       </supportedTransports>
 
-      <serviceChannel
-        dataRate="high"
-        id="901"
-        priority="medium"
-        reliability="enable" />
+      <supportedFeatures>
+        <feature type="message"/>
+      </supportedFeatures>
     </serviceProfile>
   </application>
 </resources>
