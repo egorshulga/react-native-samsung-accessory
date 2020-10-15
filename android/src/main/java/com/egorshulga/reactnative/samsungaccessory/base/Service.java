@@ -20,8 +20,7 @@ import java.util.Map;
 public abstract class Service extends ReactContextBaseJavaModule {
   protected Agent<? extends Service> agent;
   protected ReactApplicationContext reactContext;
-  private Map<String, SAPeerAgent> foundPeers = new HashMap<>();
-  private Map<String, SAPeerAgent> availablePeers = new HashMap<>();
+  protected Map<String, SAPeerAgent> peers = new HashMap<>();
 
   public Service(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -81,16 +80,30 @@ public abstract class Service extends ReactContextBaseJavaModule {
     WritableMap result = Arguments.createMap();
     result.putInt("status", status);
     if (status == SAAgentV2.PEER_AGENT_FOUND) {
+      for (SAPeerAgent peer : peerAgents) {
+        this.peers.put(peer.getPeerId(), peer);
+      }
       WritableArray peers = Arguments.createArray();
       for (SAPeerAgent peer : peerAgents) {
         peers.pushMap(Result.pack(peer));
       }
       result.putArray("peers", peers);
+    } else if (status != SAAgentV2.CONNECTION_DUPLICATE_REQUEST) {
+      this.peers.clear();
     }
     emitEvent(Event.PEERS_FOUND, result);
   }
 
   protected void onUpdatedPeers(SAPeerAgent[] peerAgents, int status) {
+    if (status == SAAgentV2.PEER_AGENT_AVAILABLE) {
+      for (SAPeerAgent peer : peerAgents) {
+        this.peers.put(peer.getPeerId(), peer);
+      }
+    } else if (status == SAAgentV2.PEER_AGENT_UNAVAILABLE) {
+      for (SAPeerAgent peer : peerAgents) {
+        this.peers.remove(peer.getPeerId());
+      }
+    }
     WritableMap result = Arguments.createMap();
     result.putInt("status", status);
     WritableArray peers = Arguments.createArray();

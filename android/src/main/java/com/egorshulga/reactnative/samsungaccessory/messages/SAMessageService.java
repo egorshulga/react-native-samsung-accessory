@@ -11,6 +11,8 @@ import com.samsung.android.sdk.accessory.SAPeerAgent;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 
 public class SAMessageService extends Service {
 
@@ -93,7 +95,18 @@ public class SAMessageService extends Service {
   }
 
   @ReactMethod
-  public void sendMessage(String message, Promise promise) {
+  public void sendMessage(String peerId, String message, Promise promise) {
+    SAPeerAgent peer = this.peers.get(peerId);
+    if (peer == null) {
+      promise.reject("UNKNOWN_PEER", String.format("Peer with id %s is not a known peer", peerId));
+      return;
+    }
+    try {
+      this.saMessage.send(peer, message.getBytes());
+      promise.resolve(null);
+    } catch (IOException e) {
+      promise.reject("IO_ERROR", e);
+    }
   }
 
   public void onReceivedMessage(String message) {
