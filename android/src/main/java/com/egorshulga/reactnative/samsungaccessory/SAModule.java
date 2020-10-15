@@ -2,14 +2,18 @@ package com.egorshulga.reactnative.samsungaccessory;
 
 import androidx.annotation.NonNull;
 
-import com.egorshulga.reactnative.samsungaccessory.constants.Error;
+import com.egorshulga.reactnative.samsungaccessory.utils.Result;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.accessory.SA;
+
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class SAModule extends ReactContextBaseJavaModule {
   private SA sa;
@@ -31,7 +35,11 @@ public final class SAModule extends ReactContextBaseJavaModule {
       sa.initialize(this.getReactApplicationContext().getApplicationContext());
       promise.resolve(null);
     } catch (SsdkUnsupportedException e) {
-      promise.reject(Error.Code.get(e.getType()), e.getMessage(), e);
+      if (e.getType() == SsdkUnsupportedException.LIBRARY_NOT_INSTALLED) {
+        promise.reject("LIBRARY_NOT_INSTALLED", e.getMessage(), e);
+      } else {
+        promise.reject("UNKNOWN", e.getMessage(), e);
+      }
     } catch (Exception e) {
       promise.reject(e);
     }

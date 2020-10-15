@@ -9,3 +9,7 @@ export interface SamsungAccessory {
   getVersionName(): Promise<string>
   isFeatureEnabled(feature: Feature): Promise<boolean>
 }
+
+export enum SAInitError {
+  LIBRARY_NOT_INSTALLED = 'LIBRARY_NOT_INSTALLED',
+}

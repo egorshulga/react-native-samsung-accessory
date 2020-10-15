@@ -1,4 +1,4 @@
-import type { Transport } from './Constants'
+import type { Transport } from '../Constants'
 
 export interface PeerAgent {
   readonly appName: string

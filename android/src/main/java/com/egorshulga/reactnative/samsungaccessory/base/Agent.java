@@ -5,7 +5,7 @@ import com.samsung.android.sdk.accessory.SAAgentV2;
 import com.samsung.android.sdk.accessory.SAPeerAgent;
 import com.samsung.android.sdk.accessory.SASocket;
 
-public abstract class Agent<TModule extends AgentModule> extends SAAgentV2 {
+public abstract class Agent<TModule extends Service> extends SAAgentV2 {
   protected final TModule agentModule;
 
   protected Agent(TModule agentModule, String name, Context context) {

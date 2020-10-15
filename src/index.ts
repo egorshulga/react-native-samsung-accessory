@@ -1,3 +1,3 @@
 export * from './SA'
 export * from './Constants'
-export * from './Message'
+export * from './message/Message'

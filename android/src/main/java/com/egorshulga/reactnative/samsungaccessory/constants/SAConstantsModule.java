@@ -22,7 +22,6 @@ public class SAConstantsModule extends ReactContextBaseJavaModule {
   public Map<String, Object> getConstants() {
     Map<String, Object> constants = new HashMap<>();
 
-    addStaticFields(constants, Error.class);
     addStaticFields(constants, Feature.class);
     addStaticFields(constants, Transport.class);
     addStaticFields(constants, Event.class);
