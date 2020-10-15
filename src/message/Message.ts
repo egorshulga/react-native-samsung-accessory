@@ -6,7 +6,7 @@ import type { PeerAgent } from '../models/PeerAgent'
 export const SAMessage: SAMessageService = NativeModules.SAMessage
 
 export interface SAMessageService extends Service {
-  init(): Promise<void>
+  initialize(): Promise<void>
   sendMessage(message: string): Promise<void>
 }
 

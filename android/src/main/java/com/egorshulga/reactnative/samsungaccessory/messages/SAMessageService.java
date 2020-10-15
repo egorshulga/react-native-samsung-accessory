@@ -11,8 +11,6 @@ import com.samsung.android.sdk.accessory.SAPeerAgent;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Map;
 
 public class SAMessageService extends Service {
 
@@ -30,7 +28,7 @@ public class SAMessageService extends Service {
 
   @Override
   @ReactMethod
-  public void init(Promise promise) {
+  public void initialize(Promise promise) {
     this.initAgent(MessageAgent.class, () -> {
       this.initSAMessage();
       promise.resolve(null);

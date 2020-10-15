@@ -28,19 +28,21 @@ public abstract class Service extends ReactContextBaseJavaModule {
     this.reactContext = reactContext;
   }
 
-  public abstract void init(Promise promise);
+  public abstract void initialize(Promise promise);
 
-    protected void initAgent(Class<? extends Agent<? extends Service>> clazz,
+  protected void initAgent(Class<? extends Agent<? extends Service>> clazz,
                            Runnable success, BiSupplier<Integer, String> error) {
     SAAgentV2.requestAgent(reactContext.getApplicationContext(), clazz.getName(),
       new SAAgentV2.RequestAgentCallback() {
         @Override
         public void onAgentAvailable(SAAgentV2 agent) {
           Service.this.agent = clazz.cast(agent);
+          Service.this.agent.setAgentModule(Service.this);
           if (success != null) {
             success.run();
           }
         }
+
         @Override
         public void onError(int errorCode, String message) {
           if (error != null) {

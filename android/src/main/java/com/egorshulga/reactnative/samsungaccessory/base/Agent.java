@@ -6,16 +6,18 @@ import com.samsung.android.sdk.accessory.SAPeerAgent;
 import com.samsung.android.sdk.accessory.SASocket;
 
 public abstract class Agent<TModule extends Service> extends SAAgentV2 {
-  protected final TModule agentModule;
+  protected TModule agentModule;
 
-  protected Agent(TModule agentModule, String name, Context context) {
+  protected Agent(String name, Context context) {
     super(name, context);
-    this.agentModule = agentModule;
   }
 
-  protected Agent(TModule agentModule, String name, Context context, Class<? extends SASocket> socketClass) {
+  protected Agent(String name, Context context, Class<? extends SASocket> socketClass) {
     super(name, context, socketClass);
-    this.agentModule = agentModule;
+  }
+
+  public void setAgentModule(Service agentModule) {
+    this.agentModule = (TModule) agentModule;
   }
 
   public void findPeers() {
