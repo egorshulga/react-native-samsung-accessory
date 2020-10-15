@@ -2,7 +2,6 @@ package com.egorshulga.reactnative.samsungaccessory;
 
 import androidx.annotation.NonNull;
 
-import com.egorshulga.reactnative.samsungaccessory.utils.Result;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -11,9 +10,6 @@ import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.accessory.SA;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public final class SAModule extends ReactContextBaseJavaModule {
   private SA sa;
