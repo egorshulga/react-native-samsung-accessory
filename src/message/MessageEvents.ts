@@ -12,6 +12,10 @@ export class MessageEvents {
     return emitter.addListener(MessageEvent.PEERS_UPDATED, listener, context)
   }
 
+  addMessageListener(listener: (message: string) => void, context?: any): EmitterSubscription {
+    return emitter.addListener(MessageEvent.RECEIVED_MESSAGE, listener, context)
+  }
+
   removeSubscription(subscription: EmitterSubscription): void {
     emitter.removeSubscription(subscription)
   }
