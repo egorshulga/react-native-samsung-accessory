@@ -68,6 +68,26 @@ public class SAMessageService extends Service {
   }
 
   @ReactMethod
+  public void getServiceChannelSize(Promise promise) {
+    super.getServiceChannelSize(promise);
+  }
+
+  @ReactMethod
+  public void getServiceChannelId(int index, Promise promise) {
+    super.getServiceChannelId(index, promise);
+  }
+
+  @ReactMethod
+  public void getServiceProfileId(Promise promise) {
+    super.getServiceProfileId(promise);
+  }
+
+  @ReactMethod
+  public void getServiceProfileName(Promise promise) {
+    super.getServiceProfileName(promise);
+  }
+
+  @ReactMethod
   public void findPeers() {
     super.findPeers();
   }

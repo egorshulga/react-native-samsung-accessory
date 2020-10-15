@@ -53,6 +53,26 @@ public abstract class Service extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getServiceChannelSize(Promise promise) {
+    promise.resolve(agent.getServiceChannelSize());
+  }
+
+  @ReactMethod
+  public void getServiceChannelId(int index, Promise promise) {
+    promise.resolve(agent.getServiceChannelId(index));
+  }
+
+  @ReactMethod
+  public void getServiceProfileId(Promise promise) {
+    promise.resolve(agent.getServiceProfileId());
+  }
+
+  @ReactMethod
+  public void getServiceProfileName(Promise promise) {
+    promise.resolve(agent.getServiceProfileName());
+  }
+
+  @ReactMethod
   public void findPeers() {
     this.agent.findPeers();
   }
