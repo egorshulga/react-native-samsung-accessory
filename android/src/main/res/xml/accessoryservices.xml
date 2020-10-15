@@ -3,7 +3,7 @@
     <serviceProfile
       role="consumer"
       name="message-service"
-      id="/react-native/message-service"
+      id="/rn/message-service"
       serviceImpl="com.egorshulga.reactnative.samsungaccessory.messages.MessageAgent"
       version="1.0">
 
