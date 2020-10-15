@@ -7,7 +7,7 @@ export const SAMessage: SAMessageService = NativeModules.SAMessage
 
 export interface SAMessageService extends Service {
   initialize(): Promise<void>
-  sendMessage(message: string): Promise<void>
+  sendMessage(peerId: string, message: string): Promise<void>
 }
 
 export enum SAMessageInitError {

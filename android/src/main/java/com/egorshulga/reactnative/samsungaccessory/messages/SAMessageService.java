@@ -55,9 +55,9 @@ public class SAMessageService extends Service {
   private void initSAMessage() {
     saMessage = new SAMessage(SAMessageService.this.agent) {
       @Override
-      protected void onReceive(SAPeerAgent saPeerAgent, byte[] bytes) {
+      protected void onReceive(SAPeerAgent peerAgent, byte[] bytes) {
         String message = new String(bytes);
-        SAMessageService.this.onReceivedMessage(message);
+        SAMessageService.this.onReceivedMessage(peerAgent, message);
       }
 
       @Override
