@@ -13,11 +13,13 @@ import com.samsung.android.sdk.accessory.SAPeerAgent;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-
+import java.util.HashMap;
+import java.util.Map;
 
 public class SAMessageService extends Service {
 
   private SAMessage saMessage;
+  private Map<Integer, Promise> messagesUnderProcessing = new HashMap<>();
 
   @NotNull
   @Override
@@ -62,10 +64,27 @@ public class SAMessageService extends Service {
 
       @Override
       protected void onSent(SAPeerAgent saPeerAgent, int id) {
+        Promise promise = messagesUnderProcessing.remove(id);
+        promise.resolve(null);
       }
 
       @Override
       protected void onError(SAPeerAgent saPeerAgent, int id, int errorCode) {
+        Promise promise = messagesUnderProcessing.remove(id);
+        String code;
+        if (errorCode == SAMessage.ERROR_PEER_AGENT_UNREACHABLE)
+          code = "ERROR_PEER_AGENT_UNREACHABLE";
+        else if (errorCode == SAMessage.ERROR_PEER_AGENT_NO_RESPONSE)
+          code = "ERROR_PEER_AGENT_NO_RESPONSE";
+        else if (errorCode == SAMessage.ERROR_PEER_AGENT_NOT_SUPPORTED)
+          code = "ERROR_PEER_AGENT_NOT_SUPPORTED";
+        else if (errorCode == SAMessage.ERROR_PEER_SERVICE_NOT_SUPPORTED)
+          code = "ERROR_PEER_SERVICE_NOT_SUPPORTED";
+        else if (errorCode == SAMessage.ERROR_SERVICE_NOT_SUPPORTED)
+          code = "ERROR_SERVICE_NOT_SUPPORTED";
+        else
+          code = "ERROR_UNKNOWN";
+        promise.reject(code, "Unable to send the message");
       }
     };
   }
@@ -102,12 +121,14 @@ public class SAMessageService extends Service {
       promise.reject("UNKNOWN_PEER", String.format("Peer with id %s is not a known peer", peerId));
       return;
     }
+    int messageId;
     try {
-      this.saMessage.send(peer, message.getBytes());
-      promise.resolve(null);
+      messageId = this.saMessage.send(peer, message.getBytes());
     } catch (IOException e) {
       promise.reject("IO_ERROR", e);
+      return;
     }
+    messagesUnderProcessing.put(messageId, promise);
   }
 
   public void onReceivedMessage(SAPeerAgent peer, String message) {
