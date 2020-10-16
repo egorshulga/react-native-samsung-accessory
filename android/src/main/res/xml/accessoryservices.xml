@@ -1,7 +1,7 @@
 <resources>
   <application name="ReactNativeToSamsungAccessory">
     <serviceProfile
-      role="consumer"
+      role="provider"
       name="messageservice"
       id="/react-native/message-service"
       serviceImpl="com.egorshulga.reactnative.samsungaccessory.messages.MessageAgent"

@@ -9,6 +9,4 @@ public class MessageAgent extends Agent<SAMessageService> {
     super("MessageService", context);
   }
 
-  public void sendMessage(String message) {
-  }
 }
